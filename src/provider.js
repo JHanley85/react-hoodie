@@ -1,24 +1,25 @@
-const { Children, Component, PropTypes } = require('react')
+'use strict';
+const React = require('react');
 
-const hoodieShape = PropTypes.shape({
-  store: PropTypes.func.isRequired,
-  bind: PropTypes.func.isRequired,
-  bindAll: PropTypes.func.isRequired
+const hoodieShape = React.PropTypes.shape({
+  store: React.PropTypes.func.isRequired,
+  bind: React.PropTypes.func.isRequired,
+  bindAll: React.PropTypes.func.isRequired
 })
 
-class Provider extends Component {
+class Provider extends React.Component {
   getChildContext () {
     return { hoodie: this.props.hoodie }
   }
   render () {
-    const { children } = this.props
-    return Children.only(children)
+    const  children  = this.props.children
+    return React.Children.only(children)
   }
 }
 
 Provider.propTypes = {
   hoodie: hoodieShape.isRequired,
-  children: PropTypes.element.isRequired
+  children: React.PropTypes.element.isRequired
 }
 Provider.childContextTypes = {
   hoodie: hoodieShape.isRequired
